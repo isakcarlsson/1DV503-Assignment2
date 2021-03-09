@@ -40,7 +40,7 @@ def list_to_table(lst):
     tree.pack(side='left')
 
     scrlbar = ttk.Scrollbar(root, orient='vertical',command=tree.yview)
-    scrlbar.pack(side='right', fill='x')
+    scrlbar.pack(side='right', fill='y')
 
     tree.configure(xscrollcommand= scrlbar.set)
 

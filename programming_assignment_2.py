@@ -253,7 +253,7 @@ def create_tables(data_companies, data_employees, data_products):
 
 def create_view():
     mycursor.execute("""CREATE VIEW CompanyRelations AS
-    SELECT id, name, market_cap, sector, country, slogan, product_id, employee_id
+    SELECT name, market_cap, sector, product_id, employee_id
     FROM Companies 
     JOIN Produces ON Companies.id = Produces.company_id
     JOIN WorksFor ON Companies.id = WorksFor.company_id""")
@@ -270,11 +270,12 @@ def crypto_companies():
     return mycursor.fetchall()
 
 def avg_age_sector():
-    mycursor.execute("""SELECT CompanyRelations.sector, AVG(Employees.age) 
+    mycursor.execute("""SELECT CompanyRelations.sector, AVG(Employees.age) AS av
     FROM CompanyRelations
     JOIN Employees ON Employees.id = CompanyRelations.employee_id
     WHERE sector IS NOT NULL 
-    GROUP BY sector""")
+    GROUP BY sector
+    ORDER BY av DESC""")
     
     return mycursor.fetchall()
 
@@ -287,7 +288,7 @@ def email_product(inp):
     return mycursor.fetchall()
     
 def get_products():
-    mycursor.execute("""SELECT name FROM Products""")
+    mycursor.execute("""SELECT name FROM Products ORDER BY name""")
     return mycursor.fetchall()
 
 def companies_info():
@@ -299,7 +300,7 @@ def employees_info():
     return mycursor.fetchall()
 
 def products_info():
-    mycursor.execute("""SELECT * FROM Products""")
+    mycursor.execute("""SELECT * FROM Products ORDER BY name""")
     return mycursor.fetchall()
 
 mycursor = cnx.cursor()
