@@ -290,6 +290,18 @@ def get_products():
     mycursor.execute("""SELECT name FROM Products""")
     return mycursor.fetchall()
 
+def companies_info():
+    mycursor.execute("""SELECT * FROM Companies""")
+    return mycursor.fetchall()
+
+def employees_info():
+    mycursor.execute("""SELECT * FROM Employees""")
+    return mycursor.fetchall()
+
+def products_info():
+    mycursor.execute("""SELECT * FROM Products""")
+    return mycursor.fetchall()
+
 mycursor = cnx.cursor()
 
 #Create database
