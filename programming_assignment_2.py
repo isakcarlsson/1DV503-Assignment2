@@ -262,10 +262,10 @@ def crypto_companies():
     """
     Returns a list of companies that has an Crypto exchange as product
     """
-    mycursor.execute("""SELECT CompanyRelations.name FROM CompanyRelations
-    JOIN Products ON CompanyRelations.product_id = Products.id
-    WHERE Products.name = 'Crypto exchange'
-    GROUP BY CompanyRelations.name""")
+    mycursor.execute("""SELECT Companies.name FROM Companies
+    JOIN Produces ON Companies.id = Produces.company_id
+    JOIN Products ON Produces.product_id = Products.id
+    WHERE Products.name = 'Crypto exchange'""")
 
     return mycursor.fetchall()
 
